@@ -7,21 +7,23 @@ https://theailearner.com/2019/01/30/contrast-stretching/
 
 import cv2 as cv
 import numpy as np
+from utils import plot_images
 
-img = cv.imread('roger.jpg')
-img = cv.resize(img, (600, 800))
+img = cv.imread('roger.jpg', 0)  # Load the image in grayscale
+img = cv.resize(img, (600, 800))  # Resize the image
 
-img = np.array(img, dtype=np.float32)
-min_val = np.min(img)
-max_val = np.max(img)
+# Convert to float32 for accurate division and multiplication
+img_float = img.astype(np.float32)
 
-if min_val != max_val:
-    res = 255 * ((img - min_val) / (max_val - min_val))
-else:
-    res = np.zeros((img.shape[0], img.shape[1]), dtype=np.float32)
+# Calculate the global minimum and maximum pixel values
+min_val = np.min(img_float)
+max_val = np.max(img_float)
 
-res = np.array(res, dtype=np.uint8)
-img = np.array(img, dtype=np.uint8)
+# Apply the Min-Max formula using vectorized computation
+minmax_img = 255 * (img_float - min_val) / (max_val - min_val)
 
-cv.imshow('Display result', cv.hconcat([img, res]))
-cv.waitKey(0)
+# Convert the stretched image back to uint8
+minmax_img_uint8 = minmax_img.astype(np.uint8)
+
+# Display the stretched image
+plot_images(img, 'original', minmax_img_uint8, 'contrast stretched')

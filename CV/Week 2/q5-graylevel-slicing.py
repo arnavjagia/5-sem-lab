@@ -16,9 +16,9 @@ img = cv.resize(img, (600, 800))
 minPixel = 100
 maxPixel = 200
 
-mask = (img >= minPixel) & (img <= maxPixel)
-res = np.zeros(img.shape, dtype=np.uint8)
+mask = (img >= minPixel) & (img <= maxPixel)  # Create a mask for pixels within the specified range
+res = np.zeros(img.shape, dtype=np.uint8)  # Initialize a result image with zeros (black)
 
-res[mask] = img[mask]
+res[mask] = img[mask]  # Apply the mask to the original image, highlighting the range
 
 plot_images(img, "Original image", res, "Gray level slicing")

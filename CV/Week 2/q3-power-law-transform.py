@@ -16,6 +16,10 @@ import numpy as np
 img = cv.imread('roger.jpg')
 img = cv.resize(img, (500, 800))
 
+"""
+img / 255 to normalize image in range 0 to 1
+multiply by c to scale back
+"""
 c = 255
 gamma = 2.2
 gamma22 = np.array(c * (img / 255) ** gamma, dtype=np.uint8)
