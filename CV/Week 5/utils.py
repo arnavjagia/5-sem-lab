@@ -34,7 +34,8 @@ def plot_images(*args):
 
         ax.imshow(image, cmap='grey')
         ax.set_title(title)
-        
+
+    plt.tight_layout()
     plt.show()
 
 

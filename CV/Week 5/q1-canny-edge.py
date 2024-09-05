@@ -1,6 +1,5 @@
 """
 Implement Canny Edge Detection
-
 """
 
 import cv2 as cv
@@ -29,8 +28,6 @@ grad_angles = np.arctan2(gy, gx)
 
 # Nonmaxsuppression
 # for every pixel, if grad dir same as neighbour, and this pixel is not max in that dir, make 0.
-
-
 def non_max_suppression(gradient_magnitude, gradient_direction):
     # Initialize output image
     output = np.zeros_like(gradient_magnitude, dtype=np.float32)

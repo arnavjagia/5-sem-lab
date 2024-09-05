@@ -4,7 +4,6 @@ Hough Transform
 
 import cv2 as cv
 import numpy as np
-
 from utils import plot_images
 
 base = "Week 5"

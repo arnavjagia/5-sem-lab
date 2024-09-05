@@ -5,6 +5,7 @@ Global Thresholding
 import cv2 as cv
 import matplotlib.pyplot as plt
 import numpy as np
+from utils import plot_images
 
 # Read and resize the image
 img = cv.imread("Week 5/roger.jpg", 0)
@@ -53,26 +54,10 @@ def global_thresholding(histg_c, starting_thres):
             histg_c, new_t
         )  # Return the result of the recursive call
 
-
-# Initialize the thresholding
 initial_threshold = 50
 final_T = global_thresholding(histg_c, initial_threshold)
 
 print("Final threshold:", final_T)
+thresholded_img = np.where(img < final_T, 0, img)  # Apply thresholding
 
-# Apply thresholding to the image
-thresholded_img = np.where(img < final_T, 0, img)  # Use np.where for efficiency
-
-# Plot the original and thresholded images
-fig, axs = plt.subplots(1, 2, figsize=(10, 8))
-
-axs[0].imshow(orig, cmap="gray")
-axs[0].set_title("Original Image")
-axs[0].axis("off")
-
-axs[1].imshow(thresholded_img, cmap="gray")
-axs[1].set_title("Thresholded Image")
-axs[1].axis("off")
-
-plt.tight_layout()
-plt.show()
+plot_images(orig, "Original Image", thresholded_img, "Thresholded Image")  # Display
