@@ -9,25 +9,23 @@ Histogram Matching
 import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
+from utils import plot_with_histogram
 
-image = cv.imread('roger.jpg')
+image = cv.imread('roger.jpg', 0)
 image = cv.resize(image, (600, 800))
-image_rgb = cv.cvtColor(image, cv.COLOR_BGR2RGB)
 
-# Calculate the histogram
-hist, bins = np.histogram(image.flatten(), 256, (0, 256))
-# Compute the cumulative distribution function
-cdf = hist.cumsum()
-cdf_normalized = cdf * hist.max() / cdf.max()
+def equalisation(img):
+    """Returns the T in s = T[r]."""
+    hist, bins = np.histogram(img, 256, (0, 256))
+    cdf = hist.cumsum()
+    T = 255 * cdf / cdf[-1]
+    return T.astype(np.uint8)
 
-# Plot histogram and C.D.F.
-fig, axs = plt.subplots(1, 2, figsize=(10, 5))
-# Show the image in grayscale
-axs[0].imshow(image_rgb, cmap="gray", vmin=0, vmax=255)
-axs[0].axis("off")
-# Plot the histogram and the CDF
-axs[1].plot(cdf_normalized, color="black", linestyle="--", linewidth=1)
-axs[1].hist(image.flatten(), 256, [0, 256], color="r", alpha=0.5)
-axs[1].set_xlim([0, 256])
-axs[1].legend(("CDF", "Histogram"), loc="upper left")
-plt.show()
+def match_histograms(src, ref):
+    T = equalisation(src)
+    G = equalisation(ref)
+    return np.interp(T[src], G, range(256))
+
+road = cv.imread("road.jpg", 0)
+eqz = match_histograms(src=road, ref=image)
+plot_with_histogram(road, "original", image, "reference", eqz, "matched")

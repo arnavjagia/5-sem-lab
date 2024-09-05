@@ -1,4 +1,5 @@
 import cv2 as cv
+import numpy as np
 import matplotlib.pyplot as plt
 
 def _parse_image_title_pairs(L):
@@ -44,3 +45,32 @@ def display_image(title, image):
     cv.destroyAllWindows()
     cv.waitKey(1)
     
+def get_cdf(img):
+    """Return a list representing the cdf function of `img`."""
+    hist, _ = np.histogram(img.flatten(), 256, (0, 256))
+    cdf = hist.cumsum()
+    cdf = cdf / cdf[-1] 
+    return cdf
+
+def plot_with_histogram(*args):
+    pairs = _parse_image_title_pairs(args)
+
+    fig, axes = plt.subplots(nrows=2, ncols=len(pairs))
+    
+    for ax in axes.flat:
+        ax.axis('off')
+
+    for i, (image, title) in enumerate(pairs):
+        col = axes[:, i] if len(pairs) > 1 else axes
+
+        col[0].set_title(title)
+        col[0].imshow(image, cmap='grey')
+
+        hist, _ = np.histogram(image, 256, (0, 256))
+        cdf = get_cdf(image)
+        cdf = cdf * max(hist) / max(cdf)
+        
+        col[1].plot(cdf, 'b--')
+        col[1].hist(image.flatten(), 256, [0,256], color='r')
+    
+    plt.show()
