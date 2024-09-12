@@ -13,7 +13,7 @@ img = cv.resize(img, (600, 800))
 
 w = int(scale * img.shape[1])
 h = int(scale * img.shape[0])
-img = cv.resize(img, (w, h), cv.INTER_LINEAR)
+img = cv.resize(img, (w, h), interpolation=cv.INTER_LINEAR)
 
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 gaussian_blurred = cv.GaussianBlur(gray, (-1, -1), sigmaX=blur_sigma, sigmaY=blur_sigma)

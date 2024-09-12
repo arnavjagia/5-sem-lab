@@ -12,6 +12,13 @@ img_red = cv.merge((zeros, zeros, r))
 img_green = cv.merge((zeros, g, zeros))
 img_blue = cv.merge((b, zeros, zeros))
 
+img_red = img.copy()
+img_green = img.copy()
+img_blue = img.copy()
+img_red[:, :, (0, 1)] = 0
+img_green[:, :, (0, 2)] = 0
+img_blue[:, :, (1, 2)] = 0
+
 cv.imshow("Red image", img_red)
 cv.waitKey(0)
 cv.imshow("Green image", img_green)

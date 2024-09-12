@@ -1,3 +1,9 @@
+"""
+cv.imread() -> returns ndarray or None
+that ndarray contains (num_rows, num_cols, num_channels) if the image is colored
+and (num_rows, num_cols) if the image is grayscale
+"""
+
 # import the cv2 library
 import cv2 as cv
 

@@ -8,6 +8,7 @@ where,
 
 https://www.slideshare.net/slideshow/log-transformation-in-image-processing-with-example/168718438#6
 https://medium.com/alphavision/image-enhancement-46f4b7fda5b4
+https://www.dynamsoft.com/blog/insights/image-processing/image-processing-101-point-operations/
 """
 
 import cv2 as cv
