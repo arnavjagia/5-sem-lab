@@ -1,8 +1,5 @@
 # python venv for labs
-ML/.venv
-CV/.venv
-BDA/.venv
-*.venv
+*.venv/
 *.pyc
 
 # python ignore
