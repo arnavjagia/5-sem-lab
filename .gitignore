@@ -1,5 +1,5 @@
 # python venv for labs
-*.venv/
+.venv/
 *.pyc
 
 # python ignore
