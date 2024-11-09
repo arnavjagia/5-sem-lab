@@ -1,3 +1,5 @@
+# [Binder](https://mybinder.org/v2/gh/apache/spark/32232e9ed33?filepath=python%2Fdocs%2Fsource%2Fgetting_started%2Fquickstart_df.ipynb)
+
 - ["Quickstart: DataFrame"](https://spark.apache.org/docs/latest/api/python/getting_started/quickstart_df.html) -- one page guide by the official docs
 
 - [`pyspark.sql.functions`](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/functions.html) -- discover useful column-wise functions here
